@@ -1,4 +1,4 @@
-#Osciloscopio
+# Osciloscopio
 
 Projeto realizado pelos alunos do curso de Sistemas Embarcados do Senai para a disciplina de Projeto de Sistemas Embarcados
 
