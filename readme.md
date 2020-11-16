@@ -21,10 +21,10 @@ Esse projeto foi feito utilizando para processadores ARM e no caso do projeto, f
 ## Pre Requisitos para o projeto - Hardware
 
 Placa Nucleo F446RE
-![Placa Nucleo F446RE](Imagens/Foto Nucleo F446RE.jpeg)
+![Placa Nucleo F446RE](Imagens/FotoNucleoF446RE.jpeg)
 
 Display TFT 2.4"
-![Display TFT 2.4"](Imagens/Nucleo com Display Montado.jpeg)
+![Display TFT 2.4"](Imagens/NucleocomDisplayMontado.jpeg)
 
 Jumper
 
