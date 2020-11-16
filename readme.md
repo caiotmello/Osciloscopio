@@ -4,7 +4,7 @@ Projeto realizado pelos alunos do curso de Sistemas Embarcados do Senai para a d
 
 # Introdução
 
-Esse projeto foi feito utilizando para processadores ARM e no caso do projeto, foi utilizado um ARM M4. Para o projeto específico, foi utlizado uma das placas Nucelo da ST a **NUCLEO-F446RE** ([Link no Site do Fabricante](https://www.st.com/en/evaluation-tools/nucleo-f446re.html) 
+Esse projeto foi feito utilizando para processadores ARM e no caso do projeto, foi utilizado um ARM M4. Para o projeto específico, foi utlizado uma das placas Nucelo da ST a **NUCLEO-F446RE** [Link no Site do Fabricante](https://www.st.com/en/evaluation-tools/nucleo-f446re.html)
 
 # Pre Requisitos para o projeto
 
