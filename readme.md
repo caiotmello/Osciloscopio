@@ -20,17 +20,19 @@ Esse projeto foi feito utilizando para processadores ARM e no caso do projeto, f
 
 ## Pre Requisitos para o projeto - Hardware
 
-Placa Nucleo F446RE
+- **Placa Nucleo F446RE:** Microcontrolado utilizada durante o projeto. 
 
 ![Placa Nucleo F446RE](Imagens/FotoNucleoF446RE.jpeg)
 
-Display TFT 2.4"
+- **Display TFT 2.4":** Display utlizado para exibição das funções
 
 ![Display TFT 2.4"](Imagens/NucleocomDisplayMontado.jpeg)
 
-Jumper
+- **Jumper:** Utilizado para ligação dos botões das funções do osciloscopio ao microcontrolador.
 
-3 botões PCB
+
+- **3 botões PCB:** Botões PCB criados para 
 
 Protoboard
+
 
