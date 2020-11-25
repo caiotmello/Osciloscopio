@@ -50,6 +50,11 @@
 #define AC     2
 #define LCD_W  320
 #define LCD_H  240
+
+/* FFT settings */
+#define SAMPLES	512 			/* 256 real party and 256 imaginary parts */
+#define FFT_SIZE SAMPLES / 2		/* FFT size is always the same size as we have samples, so 256 in our case */
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -59,6 +64,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
+ADC_HandleTypeDef hadc2;
 
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
@@ -93,7 +99,9 @@ static float32_t testOutput[TEST_LENGTH_SAMPLES/2];
 /* ------------------------------------------------------------------
 * Global variables for FFT Bin Example
 * ------------------------------------------------------------------- */
-uint32_t fftSize = 1024;
+float32_t Input[SAMPLES];
+float32_t Output[FFT_SIZE];
+
 uint32_t ifftFlag = 0;
 uint32_t doBitReverse = 1;
 
@@ -109,11 +117,14 @@ static void MX_USART2_UART_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM2_Init(void);
+static void MX_ADC2_Init(void);
 /* USER CODE BEGIN PFP */
 void USER_TFT_Init(void);
 void ModoAC(uint8_t *);
 void ModoDC(uint8_t *);
+void ModoFFT(uint8_t *);
 void TelaInicial(uint8_t *);
+void PlotaGrade(uint16_t, uint16_t, uint16_t,uint16_t,uint16_t,uint16_t);
 long map(long, long, long, long, long);
 void delayUs (uint16_t);
 
@@ -165,6 +176,7 @@ int main(void)
   MX_TIM1_Init();
   MX_ADC1_Init();
   MX_TIM2_Init();
+  MX_ADC2_Init();
   /* USER CODE BEGIN 2 */
   USER_TFT_Init();
 
@@ -288,6 +300,56 @@ static void MX_ADC1_Init(void)
   /* USER CODE BEGIN ADC1_Init 2 */
 
   /* USER CODE END ADC1_Init 2 */
+
+}
+
+/**
+  * @brief ADC2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ADC2_Init(void)
+{
+
+  /* USER CODE BEGIN ADC2_Init 0 */
+
+  /* USER CODE END ADC2_Init 0 */
+
+  ADC_ChannelConfTypeDef sConfig = {0};
+
+  /* USER CODE BEGIN ADC2_Init 1 */
+
+  /* USER CODE END ADC2_Init 1 */
+  /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion) 
+  */
+  hadc2.Instance = ADC2;
+  hadc2.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
+  hadc2.Init.Resolution = ADC_RESOLUTION_12B;
+  hadc2.Init.ScanConvMode = DISABLE;
+  hadc2.Init.ContinuousConvMode = DISABLE;
+  hadc2.Init.DiscontinuousConvMode = DISABLE;
+  hadc2.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc2.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  hadc2.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+  hadc2.Init.NbrOfConversion = 1;
+  hadc2.Init.DMAContinuousRequests = DISABLE;
+  hadc2.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+  if (HAL_ADC_Init(&hadc2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time. 
+  */
+  sConfig.Channel = ADC_CHANNEL_15;
+  sConfig.Rank = 1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
+  if (HAL_ADC_ConfigChannel(&hadc2, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ADC2_Init 2 */
+
+  /* USER CODE END ADC2_Init 2 */
 
 }
 
@@ -501,10 +563,12 @@ void USER_TFT_Init(void)
 void ModoAC(uint8_t *Tela_de_destino )
 {
     uint8_t retornar = 0;
-    uint16_t iSamplePos, iADC1;
+    uint16_t iSamplePos, iADC1,tete;
 
-    drawRGBBitmap(0, 239, telaosc_320x240, 320, 240);
-	printnewtstr (0,15, BLACK, &mono12x7bold, 1, (uint8_t *)"MODO AC");
+    //drawRGBBitmap(0, 239, telaosc_320x240, 320, 240);
+    fillScreen(BLACK);
+    PlotaGrade(300, 200, 50, 10, 20, GREY);
+	printnewtstr (0,15, RED, &mono12x7bold, 1, (uint8_t *)"MODO AC");
 
 	iSamplePos = 0;
 	// AQUI VAI O CODIGO PARA FUNCIONAMENTO DO MODO AC DO OSCILOSCÓPIO//
@@ -534,8 +598,8 @@ void ModoAC(uint8_t *Tela_de_destino )
     	//Verifica se ja foi captada as 320 amostras
     	if (iSamplePos >= LCD_W)
     	{
-    		drawRGBBitmap(0, 239, telaosc_320x240, 320, 240);
-    		printnewtstr (0,15, BLACK, &mono12x7bold, 1, (uint8_t *)"MODO AC");
+    		//drawRGBBitmap(0, 239, telaosc_320x240, 320, 240);
+    		//printnewtstr (0,15, BLACK, &mono12x7bold, 1, (uint8_t *)"MODO AC");
 
     		//Plota o sinal captado no LCD
     		for(int x = 1; x <= LCD_W; x++)
@@ -544,7 +608,14 @@ void ModoAC(uint8_t *Tela_de_destino )
     		}
     		//memset(valores,0,320);
     		iSamplePos = 0;
-    		HAL_Delay(1000);
+    		HAL_Delay(500);
+
+    		//Limpa o sinal captado no LCD e printa a grade novamente
+			for(int x = 1; x <= LCD_W; x++)
+			{
+				drawLine(x-1, 120 - iADCValues[x-1], x, 120 - iADCValues[x], BLACK);
+			}
+			PlotaGrade(300, 200, 50, 10, 20, GREY);
     	}
     	iSamplePos++;
     	delayUs(25);
@@ -581,6 +652,81 @@ void ModoDC(uint8_t *Tela_de_destino)
 	*Tela_de_destino = Menu;
 }
 
+void ModoFFT(uint8_t *Tela_de_destino) {
+
+	arm_cfft_radix4_instance_f32 S;	/* ARM CFFT module */
+	float32_t maxValue;				/* Max FFT value is stored here */
+	uint32_t maxIndex;				/* Index in Output array where max value is */
+
+	uint16_t i;
+	int32_t  amp, escala, yini, yfinal, ycentro;
+	uint16_t iSamplePos, iADC1;
+	escala = 200;
+    ycentro = 230;
+    iSamplePos = 0;
+    drawRGBBitmap(0, 239, telaosc_320x240, 320, 240);
+    printnewtstr (0,15, BLACK, &mono12x7bold, 1, (uint8_t *)"MODO FFT");
+
+	while (1) {
+
+
+		//Inicia a leitura  do conversor AD
+    	HAL_ADC_Start(&hadc1);
+    	if(HAL_ADC_PollForConversion(&hadc1, 5) == HAL_OK)
+    	{
+    		//Guarda o valor do conversor AD no Array
+    		iADC1 = HAL_ADC_GetValue(&hadc1);
+    		iADCValues[iSamplePos] = map(iADC1, 0, 4095, 0, 100);
+
+		}
+
+		for (i = 0; i < LCD_W; i += 2)
+		{
+
+			delayUs(22);
+
+			/* Real part, make offset by ADC */
+			Input[(uint16_t)i] = (float32_t)((float32_t)iADCValues[iSamplePos] );
+			/* Imaginary part */
+			Input[(uint16_t)(i + 1)] = 0;
+		}
+
+		/* Initialize the CFFT/CIFFT module, intFlag = 0, doBitReverse = 1 */
+		arm_cfft_radix4_init_f32(&S, FFT_SIZE, doBitReverse,  ifftFlag);
+
+		/* Process the data through the CFFT/CIFFT module */
+		arm_cfft_radix4_f32(&S, Input);
+
+		/* Process the data through the Complex Magniture Module for calculating the magnitude at each bin */
+		arm_cmplx_mag_f32(Input, Output, FFT_SIZE);
+
+		/* Calculates maxValue and returns corresponding value */
+		arm_max_f32(Output, FFT_SIZE, &maxValue, &maxIndex);
+
+		/* Display data on LCD */
+		//Plota o sinal captado no LCD
+    		for(int x = 60; x <= FFT_SIZE; x++)
+    		{
+
+				amp = (int32_t)(Output[x]*escala/maxValue);
+
+		 			if(amp>0)	{ yini = ycentro-amp; yfinal = ycentro;		}
+		 			else			{ yini = ycentro;	  yfinal = ycentro-amp;	}
+
+		 			fillRect(x,  yini, 1, yfinal-yini+1, RED);
+
+    		}
+
+    		        HAL_Delay(1000);
+    		        drawRGBBitmap(0, 239, telaosc_320x240, 320, 240);
+	}
+	    //Aqui é a condição de retorno/saída da tela.
+		if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6))
+		//ao sair desta tela, retorna para o menu.
+		*Tela_de_destino = Menu;
+}
+
+
 //FUNÇÃO DO MENU INICIAL DO OSCILOSCÓPIO, QUE APARECE AO LIGERMOS NOSSA PLACA, E ATRAVÉS DELE ACESSAMOS OS MODOS DO OSCILOSCÓPIO//
 void TelaInicial(uint8_t *Tela_de_destino)
 {
@@ -592,6 +738,51 @@ void TelaInicial(uint8_t *Tela_de_destino)
     if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6))
     //ao sair desta tela, retorna para o menu. Você pode mudar isto nesta linha.
     	*Tela_de_destino = Menu;
+}
+
+
+/**
+* Funcao para plotar uma grade na tela LCD
+* Por: Luiz Fernando - 22/11/2020
+* Informacoes necessarias:
+* 	Tamanho da tela Largura e Altura
+* 	Tamanho dos quadrados simetricos
+* 	Posicao X e Y do inicio da tela
+*	Cor da Linha
+* Necessario projeto com LCD em funcionamento e bibliotecas adjacentes
+* NB.: o tamanho do quadro precisa ser um MDC entre largura e altura
+*/
+void PlotaGrade(uint16_t iLargura, uint16_t iAltura, uint16_t tmQuadros, uint16_t posX, uint16_t posY, uint16_t cCOLOR)
+{
+	/** Define quantidade de quadros e tamanho */
+	uint16_t qtL = (iAltura/tmQuadros); 	//qtd linhas
+	uint16_t qtC = (iLargura/tmQuadros);	//qtd colunas
+	uint16_t corT = YELLOW;					//cor dos tracos das subdivisoes
+	int16_t posLV = (iLargura/2)+posX;		//posicao eixo central vertical
+	int16_t posLH = (iAltura/2)+posY;		//posicao eixo central horizontal
+	uint16_t i = 0;
+	/** desenha linhas verticais */
+	for(i=0;i<=qtC;i++)
+	{
+		drawFastVLine((i*tmQuadros+posX), posY, iAltura, cCOLOR);
+	}
+	/** desenha linhas horizontais */
+	for(i=0;i<=qtL;i++)
+	{
+		drawFastHLine(posX, (i*tmQuadros+posY), iLargura, cCOLOR);
+	}
+	uint16_t fDX = 4;			//fator de divisao e multiplicacao (exibir tracos)
+	uint16_t tmT = 6;			//tamanho do traco
+	/** desenha tracos verticais */
+	for(i=0;i<=(qtC*fDX);i++)
+	{
+		drawFastVLine((i*(tmQuadros/fDX)+posX), posLH-(tmT/2), tmT, corT);
+	}
+	/** desenha tracos horizontais */
+	for(i=0;i<=(qtL*fDX);i++)
+	{
+		drawFastHLine(posLV-(tmT/2), (i*(tmQuadros/fDX)+posY), tmT, corT);
+	}
 }
 
 /**

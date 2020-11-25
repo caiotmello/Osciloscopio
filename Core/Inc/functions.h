@@ -19,6 +19,7 @@
 #define MAGENTA 0xF81F
 #define YELLOW  0xFFE0
 #define WHITE   0xFFFF
+#define GREY	0x10A2
 
 
 void drawPixel(int16_t x, int16_t y, uint16_t color);
