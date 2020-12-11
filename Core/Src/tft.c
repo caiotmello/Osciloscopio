@@ -226,7 +226,7 @@ uint32_t readReg32(uint16_t reg);
 
 uint32_t readReg40(uint16_t reg);
 
-uint8_t cursor_y  =0, cursor_x    = 0;
+uint16_t cursor_y  =0, cursor_x    = 0;
 uint8_t textsize  = 1;
 uint16_t textcolor =0xffff,  textbgcolor = 0xFFFF;
 uint8_t wrap      = true;
@@ -3931,13 +3931,13 @@ void printnewtstr (int colunm,int row, uint16_t txtcolor, const GFXfont *f, uint
     @param	str	A point to the string
 */
 /**************************************************************************/
-void printnewtstr_bc(int row, uint16_t txtcolor, uint16_t txtbackcolor, const GFXfont *f, uint8_t txtsize, uint8_t *str)
+void printnewtstr_bc(int colunm ,int row, uint16_t txtcolor, uint16_t txtbackcolor, const GFXfont *f, uint8_t txtsize, uint8_t *str)
 {
 	setFont(f);
 	textcolor = txtcolor;
 	textbgcolor = txtbackcolor;
 	textsize = (txtsize > 0) ? txtsize : 1;
-	setCursor(0, row);
+	setCursor(colunm, row);
 	//while (*str) write (*str++);
 	while (*str) write_fillbackground(*str++);
 }

@@ -125,7 +125,7 @@ void setCursor(int16_t x, int16_t y);
 
 void printnewtstr (int colunm,int row, uint16_t txtcolor, const GFXfont *f, uint8_t txtsize, uint8_t *str);
 
-void printnewtstr_bc(int row, uint16_t txtcolor, uint16_t txtbackcolor, const GFXfont *f, uint8_t txtsize, uint8_t *str);
+void printnewtstr_bc(int colunm,int row, uint16_t txtcolor, uint16_t txtbackcolor, const GFXfont *f, uint8_t txtsize, uint8_t *str);
 
 void printstr (uint8_t *str);
 
