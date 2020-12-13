@@ -59,11 +59,11 @@ Da forma que o projeto está atualmente, ele referencia a biblioteca de DSP da A
 2. Depois, navegar no seguinte caminho **C/C++ Build -> Settings -> MCU GCC Linker -> Library Search Path (-L)**
 3. O caminho a alterar deve ficar da seguinte forma: 
 
-![Exemplo de Alteração do Caminho da Biblioteca DSP](Imagens/Lib Math Arm.png)
+![Exemplo de Alteração do Caminho da Biblioteca DSP](Imagens/Lib Math Arm.jpeg)
 
 4. Resolvido isso, a compilação ocorre com sucesso!
 
-![Compilação com sucesso](Imagens/Compilação com Sucesso.png)
+![Compilação com sucesso](Imagens/Compilação com Sucesso.jpeg)
 
 ## Erro da pasta CMSIS sendo gerada automaticamente
 
