@@ -1,14 +1,14 @@
 ### Sumário
-**[Considerações sobre os arquivos do Código Fonte](#SourceCode)**<br>
-**[Configuração do CubeMX](#CubeMX)**<br>
-**[Constantes, variáveis Globais e Tipos Importantes](#VarConstTypes)**<br>
-**[Funções criadas do projeto (todas no main.c)](#Functions)**<br>
+**[1.Considerações sobre os arquivos do Código Fonte](#SourceCode)**<br>
+**[2.Configuração do CubeMX](#CubeMX)**<br>
+**[3.Constantes, variáveis Globais e Tipos Importantes](#VarConstTypes)**<br>
+**[4.Funções criadas do projeto (todas no main.c)](#Functions)**<br>
 
-# Considerações sobre os arquivos do Código Fonte <a name="SourceCode"></a>
+# 1.Considerações sobre os arquivos do Código Fonte <a name="SourceCode"></a>
 
 A seguir, falamos de algumas considerações importantes sobre os arquivos *.h* e *.c* que são importantes para o correto funcionamento do projeto.  
 
-## Bibliotecas Importantes
+## 1.1.Bibliotecas Importantes
 
 Para o projeto, foram utilizadas as seguintes bibliotecas (já incluídas no código do GitHub):
 
@@ -23,7 +23,7 @@ Para o projeto, foram utilizadas as seguintes bibliotecas (já incluídas no có
 | **math.h**              | Será necessário para trabalhar com valores numéricos          |
 | **<string.h>**          | Biblioteca para trabalhar com string                          |
 
-## Folhas Importantes
+## 1.2.Folhas Importantes
 
 Além disso, necessário também além das bibliotecas acima, os seguintes arquivos em *c* no projeto (eles já estão no projeto do Git, porém importante mencionar que precisam estar lá).
 
@@ -34,9 +34,9 @@ Além disso, necessário também além das bibliotecas acima, os seguintes arqui
 | **imagens.c**           | Arquivo que contém as imagens que serão exibidas na tela do Osciloscopio para referencia dos eixos                           |
 | **arm_fft_bin_data.c**  | Para geração de séries de Fourier para análise de frequência. Aqui fica o vetor que carrega as amostrar para exibição do FFT |
 
-# Configuração do CubeMX <a name="CubeMX"></a>
+# 2.Configuração do CubeMX <a name="CubeMX"></a>
 
-A configuração de pinos foi feita toda via CubeMX:
+A configuração de pinos foi feita toda via CubeMX
 
 ![Configuração do CubeMX](Imagens/PrintIOC.jpeg)
 
@@ -63,9 +63,9 @@ Para isso foram utilizados os seguintes pinos e suas respectivas funções:
 | PH1        | N/A        | Obrigatório               | Clock Interno    | RCC                     | Utilização do Clock Interno do microcontrolador                                                                                                |
 | PH0        | N/A        | Obrigatório               | Clock Interno    | RCC                     | Utilização do Clock Interno do microcontrolador                                                                                                |
 
-# Constantes, variáveis Globais e Tipos Importantes <a name="VarConstTypes"></a>
+# 3.Constantes, variáveis Globais e Tipos Importantes <a name="VarConstTypes"></a>
 
-## Constantes
+## 3.1.Constantes
 
 | Variável                        | Valor Padrão|  Comentário                                                                     |
 | :-----------------------------: | :---------: |:------------------------------------------------------------------------------- |  
@@ -89,13 +89,35 @@ Para isso foram utilizados os seguintes pinos e suas respectivas funções:
 | **osciloscopio_320x240[76800]** | N/A         | Para exibição dos gráficos na tela do FFT                                       |
 | **telaosc_320x240[76800]**      | N/A         | Para exibição dos gráficos na tela do FFT                                       |
  
-## Variáveis Globais
+## 3.2.Variáveis Globais
 
+| Variável                             | Tipo               | Valor Padrão                                 | Comentário                                                                                            |
+| :----------------------------------: | :----------------: | :------------------------------------------: |:----------------------------------------------------------------------------------------------------- |
+| len                                  | int32_t            |  N/A                                         |                                                                                                       |
+| size                                 | int32_t            |  N/A                                         |                                                                                                       |
+| sBuffer[30]                          | char               |  N/A                                         | Usado como buffer para conversão                                                                      |
+| iADCValues[320]                      | uint8_t            |  0                                           | Buffer para guardar as amostras do sinal analogico                                                    |
+| iRefCH1                              |  uint16_t          |  120                                         | Posicao da referencia "0" no LCD                                                                      |
+| mapTime[5][2]                        | uint16_t           | {{500,100},{250,50},{100,20},{50,10},{10,0}} | Matriz de 2X2 onde o primeiro valor é o tempo em us e o segundo valor é tempo para delay de amostras  |
+| bModeDC                              | _Bool              | 1                                            | Variavel para indicar se o modo DC esta ativo                                                         |
+| iTimeRef                             | uint8_t            | 4                                            |                                                                                                       |
+| iModeFFT                             | uint8_t            | 0                                            |                                                                                                       |
+| iVolts                               | uint8_t            | 2                                            |                                                                                                       |
+| input_f32_10khz[TEST_LENGTH_SAMPLES] | float32_t          | Ver a Constante *TEST_LENGTH_SAMPLES*        | Buffer de Input e Output para o FFT                                                                   |
+| output_buffer[TEST_LENGTH_SAMPLES/2] | static float32_t   | Ver a Constante *TEST_LENGTH_SAMPLES/2*      | Buffer de Input e Output para o FFT                                                                   |
+| fim_amostragem                       | uint8_t            | 0                                            |                                                                                                       |
+| Input[SAMPLES]                       | float32_t          | N/A                                          | Variáveis Globais para o FFT                                                                          |
+| Output[FFT_SIZE]                     | float32_t          | N/A                                          | Variáveis Globais para o FFT                                                                          |
+| bHold                                | _Bool              | 0                                            | Variáveis para trabalahar com a máquina de estado                                                     |
+| bAvanca                              | _Bool              | 0                                            | Variáveis para trabalahar com a máquina de estado                                                     |
+| bRecua                               | _Bool              | 0                                            | Variáveis para trabalahar com a máquina de estado                                                     |
+| bSelect                              | _Bool              | 0                                            | Variáveis para trabalahar com a máquina de estado                                                     |
+| iMenuSelection                       | uint8_t            | 1                                            |                                                                                                       |
+| cState                               | uint8_t            | DC_GND                                       | O estado Inicial da Máquina de Estado.                                                                |
 
+## 3.3.Tipos Importantes
 
-## Tipos Importantes
-
-### State
+### 3.3.1.State
 
 Tipo que irá definir a estrutura da máquina de estado dos menus do FFT
 
@@ -109,7 +131,7 @@ struct State {
 
 ```
 
-### TipoS
+### 3.3.2.TipoS
 
 Define a estrutura para o struct tipoS onde fica a definição completa da máquina de estado que vamos usar para navegar pelos menus e fazer as funções do osciloscopio.
 
@@ -129,5 +151,5 @@ tipoS Fsm[6] = {
 
 ```
 
-# Funções criadas do projeto (todas no main.c) <a name="Functions"></a>
+# 4.Funções criadas do projeto (todas no main.c) <a name="Functions"></a>
 
