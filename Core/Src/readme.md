@@ -1,11 +1,10 @@
 ### Sumário
-**[Considerações sobre os arquivos do Código Fonte](#Considerações sobre os arquivos do Código Fonte)**<br>
-**[Configuração do CubeMX](#Configuração do CubeMX)**<br>
-**[Constantes, variáveis Globais e Tipos Importantes](#Constantes, variáveis Globais e Tipos Importantes)**<br>
-**[Funções criadas do projeto](#Funções criadas do projeto)**<br>
-**[Funções criadas do projeto (todas no main.c)](#Funções criadas do projeto (todas no main.c))**<br>
+**[Considerações sobre os arquivos do Código Fonte](#SourceCode)**<br>
+**[Configuração do CubeMX](#CubeMX)**<br>
+**[Constantes, variáveis Globais e Tipos Importantes](#VarConstTypes)**<br>
+**[Funções criadas do projeto (todas no main.c)](#Functions)**<br>
 
-# Considerações sobre os arquivos do Código Fonte
+# Considerações sobre os arquivos do Código Fonte <a name="SourceCode"></a>
 
 A seguir, falamos de algumas considerações importantes sobre os arquivos *.h* e *.c* que são importantes para o correto funcionamento do projeto.  
 
@@ -35,7 +34,7 @@ Além disso, necessário também além das bibliotecas acima, os seguintes arqui
 | **imagens.c**           | Arquivo que contém as imagens que serão exibidas na tela do Osciloscopio para referencia dos eixos                           |
 | **arm_fft_bin_data.c**  | Para geração de séries de Fourier para análise de frequência. Aqui fica o vetor que carrega as amostrar para exibição do FFT |
 
-# Configuração do CubeMX
+# Configuração do CubeMX <a name="CubeMX"></a>
 
 A configuração de pinos foi feita toda via CubeMX:
 
@@ -64,7 +63,7 @@ Para isso foram utilizados os seguintes pinos e suas respectivas funções:
 | PH1        | N/A        | Obrigatório               | Clock Interno    | RCC                     | Utilização do Clock Interno do microcontrolador                                                                                                |
 | PH0        | N/A        | Obrigatório               | Clock Interno    | RCC                     | Utilização do Clock Interno do microcontrolador                                                                                                |
 
-# Constantes, variáveis Globais e Tipos Importantes
+# Constantes, variáveis Globais e Tipos Importantes <a name="VarConstTypes"></a>
 
 ## Constantes
 
@@ -130,5 +129,5 @@ tipoS Fsm[6] = {
 
 ```
 
-# Funções criadas do projeto (todas no main.c)
+# Funções criadas do projeto (todas no main.c) <a name="Functions"></a>
 
