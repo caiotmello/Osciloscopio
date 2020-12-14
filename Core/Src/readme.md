@@ -39,7 +39,7 @@ Além disso, necessário também além das bibliotecas acima, os seguintes arqui
 
 A configuração de pinos foi feita toda via CubeMX:
 
-![Configuração do CubeMX](Imagens/PrintIOC.png)
+![Configuração do CubeMX](Imagens/PrintIOC.jpeg)
 
 Para isso foram utilizados os seguintes pinos e suas respectivas funções:
 

@@ -4,7 +4,7 @@ Um pequeno, simples, porém singelo osciloscopio.
 
 ### Sumário
 **[Introdução](#Introdução)**<br>
-**[Funcionalidades atual e suporte a leituras](#Funcionalidades atual e suporte a leituras)**<br>
+**[Funcionalidades atuais e suporte a leituras](#Funcionalidades atual e suporte a leituras)**<br>
 **[Pre Requisitos para o projeto](#Pre Requisitos para o projeto)**<br>
 **[Erros Conhecidos](#Erros Conhecidos)**<br>
 **[Créditos](#Créditos)**<br>
@@ -59,11 +59,11 @@ Da forma que o projeto está atualmente, ele referencia a biblioteca de DSP da A
 2. Depois, navegar no seguinte caminho **C/C++ Build -> Settings -> MCU GCC Linker -> Library Search Path (-L)**
 3. O caminho a alterar deve ficar da seguinte forma: 
 
-![Exemplo de Alteração do Caminho da Biblioteca DSP](Imagens/Lib Math Arm.jpeg)
+![Exemplo de Alteração do Caminho da Biblioteca DSP](Imagens/LibMathArm.jpeg)
 
 4. Resolvido isso, a compilação ocorre com sucesso!
 
-![Compilação com sucesso](Imagens/Compilação com Sucesso.jpeg)
+![Compilação com sucesso](Imagens/CompilaçãocomSucesso.jpeg)
 
 ## Erro da pasta CMSIS sendo gerada automaticamente
 
