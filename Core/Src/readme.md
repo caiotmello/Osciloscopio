@@ -1,9 +1,9 @@
 ### Sumário
-**[Considerações sobre os arquivos do Código Fonte](# Considerações sobre os arquivos do Código Fonte)**<br>
-**[Configuração do CubeMX](# Configuração do CubeMX)**<br>
-**[Constantes, variáveis Globais e Tipos Importantes](# Constantes, variáveis Globais e Tipos Importantes)**<br>
-**[Funções criadas do projeto](# Funções criadas do projeto)**<br>
-**[Funções criadas do projeto (todas no main.c)](# Funções criadas do projeto (todas no main.c))**<br>
+**[Considerações sobre os arquivos do Código Fonte](#Considerações sobre os arquivos do Código Fonte)**<br>
+**[Configuração do CubeMX](#Configuração do CubeMX)**<br>
+**[Constantes, variáveis Globais e Tipos Importantes](#Constantes, variáveis Globais e Tipos Importantes)**<br>
+**[Funções criadas do projeto](#Funções criadas do projeto)**<br>
+**[Funções criadas do projeto (todas no main.c)](#Funções criadas do projeto (todas no main.c))**<br>
 
 # Considerações sobre os arquivos do Código Fonte
 
@@ -13,8 +13,8 @@ A seguir, falamos de algumas considerações importantes sobre os arquivos *.h* 
 
 Para o projeto, foram utilizadas as seguintes bibliotecas (já incluídas no código do GitHub):
 
-| ** Biblioteca **        | ** Utilização **                                              |
-| :---------------------: | :-----------------------------------------------------------: |
+|    Biblioteca           | Utilização                                                    |
+| :---------------------: | :------------------------------------------------------------ |
 | **fonts.h**             | Biblioteca de fontes para exibição de gráficos no display TFT |
 | **tft.h**               | Biblioteca para escrita de valores no display TFT             |
 | **user_setting.h**      | Biblioteca para escrita de valores no display TFT             |
@@ -28,8 +28,8 @@ Para o projeto, foram utilizadas as seguintes bibliotecas (já incluídas no có
 
 Além disso, necessário também além das bibliotecas acima, os seguintes arquivos em *c* no projeto (eles já estão no projeto do Git, porém importante mencionar que precisam estar lá).
 
-| ** Arquivo**            | ** Utilização **                                                                                                             |
-| :---------------------: | :--------------------------------------------------------------------------------------------------------------------------: |
+| Arquivo                 | Utilização                                                                                                                   |
+| :---------------------: | :--------------------------------------------------------------------------------------------------------------------------- |
 | **fonts.c**             | Arquivo de fontes para exibição de gráficos no display TFT                                                                   |
 | **tft.c**               | Arquivo para escrita de valores no display TFT                                                                               |
 | **imagens.c**           | Arquivo que contém as imagens que serão exibidas na tela do Osciloscopio para referencia dos eixos                           |
@@ -43,8 +43,8 @@ A configuração de pinos foi feita toda via CubeMX:
 
 Para isso foram utilizados os seguintes pinos e suas respectivas funções:
 
-| ** Pino ** | ** Port ** | ** Obrigatório/Opcional **| ** Utilização ** | ** Função Especial   ** | ** Comentários                                                                                                                              ** |
-| :--------: | :--------: |:------------------------: | :--------------: | :---------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------: |  
+| Pino       | Port       | Obrigatório/Opcional      | Utilização       | Função Especial         | Comentários                                                                                                                                    |
+| :--------: | :--------: |:------------------------: | :--------------: | :---------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------- |  
 | PA2        | A          | Opcional                  | RS232 TX         | USART                   | Pode ser ativado caso queira fazer a leitura de algum resultado pela Serial (USART)                                                            |
 | PA3        | A          | Opcional                  | RS232 RX         | USART                   | Pode ser ativado caso queira fazer a leitura de algum resultado pela Serial (USART)                                                            |
 | PA5        | A          | Opcional                  | LED Interno      | N/A                     | Pode ser usado para verificar alguma questão ou retorno para controle interno da placa. Por padrão, a placa do display TFT encobre esse LED.   |
@@ -68,27 +68,27 @@ Para isso foram utilizados os seguintes pinos e suas respectivas funções:
 
 ## Constantes
 
-| ** Variável                   ** | ** Valor Padrão ** | ** Comentário                                                                ** |
-| :------------------------------: | :----------------: |:------------------------------------------------------------------------------: |  
-| ** DEBUG**                       | 0                  | Variável para auxiliar quando for necessário acionar algum debug                |
-| ** TEST_LENGTH_SAMPLES**         | 2048               | Usado pelas funções do FFT. Define a quantidade de amostras a capturar          |               
-| ** LCD_W**                       | 320                | Usado pelas funções do TFT. Define a largura do LCD em Pixels                   |
-| ** LCD_H**                       | 240                | Usado pelas funções do TFT. Define a altura do LCD em Pixels                    |
-| ** TIME_MAX**                    | 5                  |                                                                                 |
-| ** SAMPLES**                     | 512                | Usado pelo FFT. Com isso, utilizamos para a exibição dos grafico do FFT na tela |
-| ** FFT_SIZE SAMPLES / 2**        |                    | Usado pelo FFT. Com isso, utilizamos para a exibição dos grafico do FFT na tela |
-| ** DC_GND**                      | 0                  | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
-| ** FFT**                         | 1                  | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
-| ** T_DIV**                       | 2                  | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
-| ** HOLD_DC**                     | 3                  | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
-| ** HOLD_FFT**                    | 4                  | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
-| ** HOLD_TDIV**                   | 5                  | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
-| ** DC_GND_SCREEN**               | 1                  | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
-| ** FFT_SCREEN**                  | 2                  | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
-| ** FREQ_SCREEN**                 | 3                  | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
-| ** HOLD_SCREEN**                 | 4                  | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
-| ** osciloscopio_320x240[76800]** | N/A                | Para exibição dos gráficos na tela do FFT                                       |
-| ** telaosc_320x240[76800]**      | N/A                | Para exibição dos gráficos na tela do FFT                                       |
+| Variável                        | Valor Padrão|  Comentário                                                                     |
+| :-----------------------------: | :---------: |:------------------------------------------------------------------------------- |  
+| **DEBUG**                       | 0           | Variável para auxiliar quando for necessário acionar algum debug                |
+| **TEST_LENGTH_SAMPLES**         | 2048        | Usado pelas funções do FFT. Define a quantidade de amostras a capturar          |               
+| **LCD_W**                       | 320         | Usado pelas funções do TFT. Define a largura do LCD em Pixels                   |
+| **LCD_H**                       | 240         | Usado pelas funções do TFT. Define a altura do LCD em Pixels                    |
+| **TIME_MAX**                    | 5           |                                                                                 |
+| **SAMPLES**                     | 512         | Usado pelo FFT. Com isso, utilizamos para a exibição dos grafico do FFT na tela |
+| **FFT_SIZE SAMPLES / 2**        |             | Usado pelo FFT. Com isso, utilizamos para a exibição dos grafico do FFT na tela |
+| **DC_GND**                      | 0           | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
+| **FFT**                         | 1           | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
+| **T_DIV**                       | 2           | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
+| **HOLD_DC**                     | 3           | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
+| **HOLD_FFT**                    | 4           | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
+| **HOLD_TDIV**                   | 5           | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
+| **DC_GND_SCREEN**               | 1           | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
+| **FFT_SCREEN**                  | 2           | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
+| **FREQ_SCREEN**                 | 3           | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
+| **HOLD_SCREEN**                 | 4           | Para referenciar os estados da Máquina de Estado do Menu do FFT                 |
+| **osciloscopio_320x240[76800]** | N/A         | Para exibição dos gráficos na tela do FFT                                       |
+| **telaosc_320x240[76800]**      | N/A         | Para exibição dos gráficos na tela do FFT                                       |
  
 ## Variáveis Globais
 
