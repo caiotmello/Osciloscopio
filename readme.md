@@ -3,11 +3,11 @@
 Um pequeno, simples, porém singelo osciloscopio.
 
 ### Sumário
-**[Introdução](# Introdução)**<br>
-**[Funcionalidades atual e suporte a leituras](# Funcionalidades atual e suporte a leituras)**<br>
-**[Pre Requisitos para o projeto](# Pre Requisitos para o projeto)**<br>
-**[Erros Conhecidos](# Erros Conhecidos)**<br>
-**[Créditos](# Créditos)**<br>
+**[Introdução](#Introdução)**<br>
+**[Funcionalidades atual e suporte a leituras](#Funcionalidades atual e suporte a leituras)**<br>
+**[Pre Requisitos para o projeto](#Pre Requisitos para o projeto)**<br>
+**[Erros Conhecidos](#Erros Conhecidos)**<br>
+**[Créditos](#Créditos)**<br>
 
 # Introdução
 
