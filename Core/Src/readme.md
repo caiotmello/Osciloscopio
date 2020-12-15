@@ -38,7 +38,7 @@ Além disso, necessário também além das bibliotecas acima, os seguintes arqui
 
 A configuração de pinos foi feita toda via CubeMX
 
-![Configuração do CubeMX](Core/Src/PrintIOC.jpeg)
+![Configuração do CubeMX](Imagens/PrintIOC.jpeg)
 
 Para isso foram utilizados os seguintes pinos e suas respectivas funções:
 
@@ -427,7 +427,7 @@ void ModoFFT(void)
 		 */
 
 }
-````
+```
 
 ## 4.6.updateMenu
 
@@ -511,6 +511,7 @@ Callback de tratamento de interrupcao EXTI
 1. Parametros de Entrada: GPIO_PIN (Pino pressionado para verificar a interrupção)
 2. Parametros de Saída: N/A
 
+```c
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	//Verifica se a o botao hold foi pressionado
