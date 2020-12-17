@@ -43,7 +43,7 @@ A configuração de pinos foi feita toda via CubeMX
 Para isso foram utilizados os seguintes pinos e suas respectivas funções:
 
 | Pino       | Port       | Obrigatório/Opcional      | Utilização       | Função Especial         | Comentários                                                                                                                                    |
-| :--------: | :--------: |:------------------------: | :--------------: | :---------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------- |  
+| :--------- | :--------: |:------------------------: | :--------------: | :---------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------- |  
 | PA2        | A          | Opcional                  | RS232 TX         | USART                   | Pode ser ativado caso queira fazer a leitura de algum resultado pela Serial (USART)                                                            |
 | PA3        | A          | Opcional                  | RS232 RX         | USART                   | Pode ser ativado caso queira fazer a leitura de algum resultado pela Serial (USART)                                                            |
 | PA5        | A          | Opcional                  | LED Interno      | N/A                     | Pode ser usado para verificar alguma questão ou retorno para controle interno da placa. Por padrão, a placa do display TFT encobre esse LED.   |
@@ -91,29 +91,29 @@ Para isso foram utilizados os seguintes pinos e suas respectivas funções:
  
 ## 3.2.Variáveis Globais
 
-| Variável                             | Tipo               | Valor Padrão                                 | Comentário                                                                                            |
-| :----------------------------------: | :----------------: | :------------------------------------------: |:----------------------------------------------------------------------------------------------------- |
-| len                                  | int32_t            |  N/A                                         |                                                                                                       |
-| size                                 | int32_t            |  N/A                                         |                                                                                                       |
-| sBuffer[30]                          | char               |  N/A                                         | Usado como buffer para conversão                                                                      |
-| iADCValues[320]                      | uint8_t            |  0                                           | Buffer para guardar as amostras do sinal analogico                                                    |
-| iRefCH1                              |  uint16_t          |  120                                         | Posicao da referencia "0" no LCD                                                                      |
-| mapTime[5][2]                        | uint16_t           | {{500,100},{250,50},{100,20},{50,10},{10,0}} | Matriz de 2X2 onde o primeiro valor é o tempo em us e o segundo valor é tempo para delay de amostras  |
-| bModeDC                              | _Bool              | 1                                            | Variavel para indicar se o modo DC esta ativo                                                         |
-| iTimeRef                             | uint8_t            | 4                                            |                                                                                                       |
-| iModeFFT                             | uint8_t            | 0                                            |                                                                                                       |
-| iVolts                               | uint8_t            | 2                                            |                                                                                                       |
-| input_f32_10khz[TEST_LENGTH_SAMPLES] | float32_t          | Ver a Constante *TEST_LENGTH_SAMPLES*        | Buffer de Input e Output para o FFT                                                                   |
-| output_buffer[TEST_LENGTH_SAMPLES/2] | static float32_t   | Ver a Constante *TEST_LENGTH_SAMPLES/2*      | Buffer de Input e Output para o FFT                                                                   |
-| fim_amostragem                       | uint8_t            | 0                                            |                                                                                                       |
-| Input[SAMPLES]                       | float32_t          | N/A                                          | Variáveis Globais para o FFT                                                                          |
-| Output[FFT_SIZE]                     | float32_t          | N/A                                          | Variáveis Globais para o FFT                                                                          |
-| bHold                                | _Bool              | 0                                            | Variáveis para trabalahar com a máquina de estado                                                     |
-| bAvanca                              | _Bool              | 0                                            | Variáveis para trabalahar com a máquina de estado                                                     |
-| bRecua                               | _Bool              | 0                                            | Variáveis para trabalahar com a máquina de estado                                                     |
-| bSelect                              | _Bool              | 0                                            | Variáveis para trabalahar com a máquina de estado                                                     |
-| iMenuSelection                       | uint8_t            | 1                                            |                                                                                                       |
-| cState                               | uint8_t            | DC_GND                                       | O estado Inicial da Máquina de Estado.                                                                |
+| Variável                                 | Tipo               | Valor Padrão                                 | Comentário                                                                                            |
+| :--------------------------------------: | :----------------: | :------------------------------------------: |:----------------------------------------------------------------------------------------------------- |
+| **len**                                  | int32_t            |  N/A                                         |                                                                                                       |
+| **size**                                 | int32_t            |  N/A                                         |                                                                                                       |
+| **sBuffer[30]**                          | char               |  N/A                                         | Usado como buffer para conversão                                                                      |
+| **iADCValues[320]**                      | uint8_t            |  0                                           | Buffer para guardar as amostras do sinal analogico                                                    |
+| **iRefCH1**                              |  uint16_t          |  120                                         | Posicao da referencia "0" no LCD                                                                      |
+| **mapTime[5][2]**                        | uint16_t           | {{500,100},{250,50},{100,20},{50,10},{10,0}} | Matriz de 2X2 onde o primeiro valor é o tempo em us e o segundo valor é tempo para delay de amostras  |
+| **bModeDC**                              | _Bool              | 1                                            | Variavel para indicar se o modo DC esta ativo                                                         |
+| **iTimeRef**                             | uint8_t            | 4                                            |                                                                                                       |
+| **iModeFFT**                             | uint8_t            | 0                                            |                                                                                                       |
+| **iVolts**                               | uint8_t            | 2                                            |                                                                                                       |
+| **input_f32_10khz[TEST_LENGTH_SAMPLES]** | float32_t          | Ver a Constante *TEST_LENGTH_SAMPLES*        | Buffer de Input e Output para o FFT                                                                   |
+| **output_buffer[TEST_LENGTH_SAMPLES/2]** | static float32_t   | Ver a Constante *TEST_LENGTH_SAMPLES/2*      | Buffer de Input e Output para o FFT                                                                   |
+| **fim_amostragem**                       | uint8_t            | 0                                            |                                                                                                       |
+| **Input[SAMPLES]**                       | float32_t          | N/A                                          | Variáveis Globais para o FFT                                                                          |
+| **Output[FFT_SIZE]**                     | float32_t          | N/A                                          | Variáveis Globais para o FFT                                                                          |
+| **bHold**                                | _Bool              | 0                                            | Variáveis para trabalahar com a máquina de estado                                                     |
+| **bAvanca**                              | _Bool              | 0                                            | Variáveis para trabalahar com a máquina de estado                                                     |
+| **bRecua**                               | _Bool              | 0                                            | Variáveis para trabalahar com a máquina de estado                                                     |
+| **bSelect**                              | _Bool              | 0                                            | Variáveis para trabalahar com a máquina de estado                                                     |
+| **iMenuSelection**                       | uint8_t            | 1                                            |                                                                                                       |
+| **cState**                               | uint8_t            | DC_GND                                       | O estado Inicial da Máquina de Estado.                                                                |
 
 ## 3.3.Tipos Importantes
 
@@ -610,8 +610,9 @@ void PlotaGrade(uint16_t iLargura, uint16_t iAltura, uint16_t tmQuadros, uint16_
 
 Função MAP, portado do Arduino para o STM32
 
-1. Parametros de Entrada:     
-2. Parametros de Saída: 
+Serve para converter uma escala de valores. Usado no código para as funções do conversor AD.
+1. Parametros de Entrada: Valores de escala a converter.    
+2. Parametros de Saída: Valores de escala já convertidos.
 
 ```c
 long map(long x, long in_min, long in_max, long out_min, long out_max)

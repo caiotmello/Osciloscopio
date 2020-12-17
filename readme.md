@@ -20,7 +20,7 @@ Projeto realizado pelos alunos do curso de *Sistemas Embarcados do Senai (Turma 
 3. Função "Trigger" para congelar a leitura em Tela
 4. Ajuste de escala de leitura
 5. Geração de um GND para referência
-6. Geração de frequencia de 500hz e 1Khz
+6. Geração de frequencia de 500hz e 10Khz
 
 # 3.Pre Requisitos para o projeto <a name="PreReqs"></a>
 
@@ -28,7 +28,7 @@ Abaixo falamos um pouco do que você vai precisar de Hardware e software para ro
 
 ## 3.1.Pre Requisitos para o projeto - Hardware
 
-- **Placa Nucleo F446RE:** Microcontrolado utilizada durante o projeto. 
+- **Placa Nucleo F446RE:** Microcontroladora utilizada durante o projeto. 
 
 ![Placa Nucleo F446RE](Imagens/FotoNucleoF446RE.jpeg)
 
@@ -41,7 +41,7 @@ No arquivo **Readme.md** ([Disponível aqui](https://github.com/caiotmello/Oscil
 - **Jumper:** Utilizado para ligação dos botões das funções do osciloscopio ao microcontrolador.
 - **3 botões PCB:** Botões PCB criados para navegar nas funções do Menu do Osciloscopio.
 - **Protoboard**: Conectar os jumpers, botões e pontas da prova a placa.
-- **Resistores**: 
+- **Resistores**: Ver esquema elétrico na pasta ![Projeto PCB](https://github.com/caiotmello/Osciloscopio/tree/master/Projeto%20PCB)
 - **Cabo USB**: Para carregar o programa e conectar a placa ao computador. Para referencia, o cabo USB deve ter em uma ponta uma saída do tipo *USB-A* e na outra uma saída do tipo *MINI-USB* (Esta é similar ao cabo de carga do controle do PS3). **Importante mencionar que ao adquirir a placa da ST, a mesma não vem com esse cabo, ele deve ser adquirido a parte.** Além disso, também é possível carregar a placa da ST utilizando o ST-LINK caso você tenha, porém para esse projeto não utilizamos o ST-LINK.
 
 ## 3.2.Pre Requisitos para o projeto - Software
